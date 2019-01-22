@@ -4,10 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(-1);
 
 include('DbConnect.php');
-// include('Register.php');
 
-// $_SESSION["favcolor"] = "green";
-// echo"session is set";
 if(!empty($_POST))
 {
 
@@ -20,14 +17,9 @@ if(!empty($_POST))
 
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) > 0) {
-     {
-      // $_SESSION['login_user'] = $emailusername;
-      header("location: welcome.php");
-    }
-  }
-  else {
-  $error="Your Login Name or Password is invalid";
-  }
+    header("location: welcome.php");
+  }else{
+    echo"Login Details Invalid";
   }
 
   // $active=$row['active'];
