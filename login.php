@@ -1,9 +1,6 @@
 <?php
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
-
 include('DbConnect.php');
+session_start();
 
 if(!empty($_POST))
 {
@@ -17,23 +14,11 @@ if(!empty($_POST))
 
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) > 0) {
+    $_SESSION['login_user'] = $emailusername;
     header("location: welcome.php");
   }else{
     echo"Login Details Invalid";
   }
-
-  // $active=$row['active'];
-  // $count=mysqli_num_rows($result);
-
-  // if($count==1)
-  // {
-  // $_SESSION['login_user'] = $emailusername;
-  // header("location: welcome.php");
-  // }
-  // else 
-  // {
-  // $error="Your Login Name or Password is invalid";
-  // }
 }
 
 ?>

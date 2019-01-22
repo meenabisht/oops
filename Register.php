@@ -2,6 +2,16 @@
 <body>
 <?php  
 
+session_start();
+if(isset($_SESSION['name']))
+  {
+    echo "Welcome  <a href='welcome.php'>Go to Home</a>";
+  }
+else{
+echo"Please Register first";  
+}
+
+
 include_once('DbConnect.php');
   $name=$_POST["name"];
   $addr=$_POST["addr"];
