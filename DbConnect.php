@@ -1,22 +1,15 @@
-<?php
-class DbConnect {
-  private $host = 'localhost';
-  private $user = 'root';
-  private $pass = 'root';
-  private $dbname = 'FirstDB';
-  
-
-  public $db_connection = false;
-  public $logs = array();
- 
-  public function __construct($host, $user, $pass, $dbname) {
-    $this->logs[] = "Attempting to connect to the database.";
-    
-    $conn = mysqli_connect($host, $user, $pass);        
-      if(! $conn ) {
-        die('Could not connect: ' . mysql_error());
-      }
-      echo 'Connected successfully';
-      mysqli_close($conn);
-  }
-}
+<?php  
+  class dbConnect {  
+    function __construct() {   
+      $conn = mysqli_connect('localhost','root','root','FirstDB');   
+      if(!$conn)// testing the connection  
+      {  
+          die ("Cannot connect to the database");  
+      }   
+      return $conn;  
+    }  
+    public function Close(){  
+      mysqli_close();  
+    }  
+  }  
+?> 

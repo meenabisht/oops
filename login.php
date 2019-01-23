@@ -1,27 +1,3 @@
-<?php
-include('DbConnect.php');
-session_start();
-
-if(!empty($_POST))
-{
-
-  $conn = mysqli_connect('localhost', 'root', 'root', 'FirstDB');
-
-  $emailusername = mysqli_real_escape_string($conn, $_POST['emailusername']); 
-  $mobno = mysqli_real_escape_string($conn, $_POST['mobno']);
-
-  $sql = "SELECT * FROM CandidateDB WHERE (name='$emailusername' or email = '$emailusername') and mobno='$mobno'";
-
-  $result = mysqli_query($conn, $sql);
-  if(mysqli_num_rows($result) > 0) {
-    $_SESSION['login_user'] = $emailusername;
-    header("location: welcome.php");
-  }else{
-    echo"Login Details Invalid";
-  }
-}
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,3 +14,31 @@ if(!empty($_POST))
     </form>
 </body>
 </html>
+
+
+<?php
+include("DbConnect.php");
+include("user.php");
+session_start();
+
+  if(!empty($_POST))
+  {
+    $emailusername = mysqli_real_escape_string($conn, $_POST['emailusername']); 
+    $mobno = mysqli_real_escape_string($conn, $_POST['mobno']);
+
+    $sql = "SELECT * FROM CandidateDB WHERE email = '$emailusername' and mobno='$mobno'";
+    $result = mysqli_query($conn, $sql);
+    $user_obj = new user();
+    $us = $user_obj->login();
+    if($us){
+      $_SESSION['login_user'] = $emailusername;
+      header("location: welcome.php");
+    }else{
+      echo"please register first";
+    }
+  }
+
+
+?>
+
+
