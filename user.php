@@ -2,49 +2,45 @@
 // include("DbConnect.php"); 
 // error_reporting(E_ALL);
 // ini_set('display_errors', '1'); 
-function __autoload($class){    
-  include_once($class.".php"); 
-}
-class user {             
+session_start();
+spl_autoload_register(function ($class_name){    
+  include_once($class_name.".php"); 
+});
+class user{
 
   public function userlogin($emailusername, $mobno){
-    $conn=new DbConnect();
+    $conn_obj = new DbConnect();
+    $connection = $conn_obj->getConnection();
     if(!empty($_POST)){
-    $stmt =$conn->conn->prepare("SELECT * FROM CandidateDB WHERE (name = '$emailusername' or email = '$emailusername')AND mobno = '$mobno' ;");
-    $result = mysqli_query($conn, $stmt);
-
+    $stmt = ("SELECT * FROM CandidateDB WHERE (name = '$emailusername' or email = '$emailusername') AND mobno = '$mobno';");
+    $result = mysqli_query($connection, $stmt);
     if(mysqli_num_rows($result) > 0){
+      $_SESSION['login_user'] = $emailusername;
       header("location: welcome.php");
-    }else{
-      echo"please register first";
     }
     }
-    // $stmt->execute();
-    // $ra=$stmt->rowCount();
-    // return $ra;
   }
 
   public function userregister($name,$addr,$email,$mobno,$high_qual){
-    $conn=new DbConnect();
-    // $sql="INSERT INTO CandidateDB (name,addr,email,mobno,high_qual) VALUES ('$name', '$addr', '$email', '$mobno', '$high_qual')";
-    // $qr = $conn->conn->prepare($sql);
-    // $qr->execute();
-    // echo"Registration Successful";
-    // return true;
-
-    $sql ="SELECT * from CandidateDB WHERE name = '$name' or email = '$email'";
-    $register_user = mysqli_query($conn,$sql) or die(mysqli_error($sql));
+    $conn_obj = new DbConnect();
+    $connection = $conn_obj->getConnection();  
+    $sql="SELECT * from CandidateDB WHERE name = '$name' or email = '$email'";
+    $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);
 
     if($no_rows == 0)
     {
-      $sql2 = "INSERT INTO CandidateDB (name,addr,email,mobno,high_qual) VALUES ('$name', '$addr', '$email', '$mobno', '$high_qual')";
-      $result = mysqli_query($conn, $sql2) or die(mysqli_error($sql2));
-      echo "Registration Successfull!";
+      $sql2 = "INSERT INTO CandidateDB (name,addr,email,mobno,high_qual) VALUES ('$name','$addr','$email','$mobno','$high_qual')";
+      // var_dump($sql2);
+      $result1 = mysqli_query($connection, $sql2);
+      return TRUE;
+  
+      // var_dump($result);
+      // print_r($result);
+      // echo "Registration Successfull!";
+    }else{
+      return FALSE;
     }
-    else{
-      echo "Registration Failed.";
-    }
-  }l
+  }
 }
 ?> 

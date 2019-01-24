@@ -1,12 +1,17 @@
 <?php
-echo"you are logged in";
+session_start();
+if( isset($_SESSION['login_user']) )
+{
+  echo "welcome".$_SESSION['login_user']."!";
+}
 ?>
-
 <html>
   <head></head>
   <body>
     <div>
-     <a href="logout.php">Logout</a>
+     <button type="submit"><a href="logout.php">Logout</a></button>
     </div>
   </body>
 </html>
+
+
