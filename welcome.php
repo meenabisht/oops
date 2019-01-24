@@ -6,7 +6,7 @@ echo"you are logged in";
   <head></head>
   <body>
     <div>
-      <button><a href="logout.php">Logout</a></button>
+     <a href="logout.php">Logout</a>
     </div>
   </body>
 </html>

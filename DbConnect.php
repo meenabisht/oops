@@ -1,15 +1,15 @@
-<?php  
-  class dbConnect {  
-    function __construct() {   
-      $conn = mysqli_connect('localhost','root','root','FirstDB');   
-      if(!$conn)// testing the connection  
-      {  
-          die ("Cannot connect to the database");  
-      }   
-      return $conn;  
-    }  
-    public function Close(){  
-      mysqli_close();  
-    }  
-  }  
-?> 
+<?php
+class DbConnect {
+  public $host = 'localhost';
+  public $user = 'root';
+  public $pass = 'root';
+  public $dbname = 'FirstDB';
+  public $conn;
+
+  
+  public function __construct(){
+       
+    $this->conn = new PDO("mysql:host=".$this->servername.";dbname=".$this->db,$this->Cusername,$this->Cpassword);
+    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+}
