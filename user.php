@@ -8,16 +8,19 @@ spl_autoload_register(function ($class_name){
 });
 class user{
 
-  public function userlogin($emailusername, $mobno){
+  public function userlogin($emailusername, $mobno) {
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();
-    if(!empty($_POST)){
-    $stmt = ("SELECT * FROM CandidateDB WHERE (name = '$emailusername' or email = '$emailusername') AND mobno = '$mobno';");
-    $result = mysqli_query($connection, $stmt);
-    if(mysqli_num_rows($result) > 0){
-      $_SESSION['login_user'] = $emailusername;
-      header("location: welcome.php");
-    }
+    if(!empty($_POST)) {
+      $stmt = ("SELECT * FROM CandidateDB WHERE (name = '$emailusername' or email = '$emailusername') AND mobno = '$mobno';");
+      $result = mysqli_query($connection, $stmt);
+      if(mysqli_num_rows($result) > 0) {
+        $_SESSION['login_user'] = $emailusername;
+        $_SESSION["mobno"]= $_POST['mobno'];
+        header("location: welcome.php");
+        return TRUE;
+      }
+      return FALSE;
     }
   }
 
@@ -28,17 +31,12 @@ class user{
     $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);
 
-    if($no_rows == 0)
-    {
+    if($no_rows == 0) {
       $sql2 = "INSERT INTO CandidateDB (name,addr,email,mobno,high_qual) VALUES ('$name','$addr','$email','$mobno','$high_qual')";
       // var_dump($sql2);
       $result1 = mysqli_query($connection, $sql2);
       return TRUE;
-  
-      // var_dump($result);
-      // print_r($result);
-      // echo "Registration Successfull!";
-    }else{
+    } else {  
       return FALSE;
     }
   }
