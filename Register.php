@@ -1,6 +1,8 @@
 <?php
-include("Register.php");
-include("user.php");
+function __autoload($class){    
+  include_once($class.".php");
+}
+//include("user.php");
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {  
   $reg_obj=new user();

@@ -2,8 +2,9 @@
 // include("DbConnect.php"); 
 // error_reporting(E_ALL);
 // ini_set('display_errors', '1'); 
-include("DbConnect.php");
-
+function __autoload($class){    
+  include_once($class.".php"); 
+}
 class user {             
 
   public function userlogin($emailusername, $mobno){
@@ -44,6 +45,6 @@ class user {
     else{
       echo "Registration Failed.";
     }
-  }
+  }l
 }
 ?> 
