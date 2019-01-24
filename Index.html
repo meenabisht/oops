@@ -1,38 +1,23 @@
-
-
-<!-- <html>
-<body>
-  
-// include_once('DbConnect.php');
-//   $name=$_POST["name"];
-//   $addr=$_POST["addr"];
-//   $email=$_POST["email"];
-//   $mobno=$_POST["mobno"];
-//   $high_qual=$_POST["high_qual"];       
-//   $db_object=new DbConnect('localhost','root','root','FirstDB');
-//   $conn = mysqli_connect('localhost', 'root', 'root');
-//   // Check connection
-//   if (!$conn) {
-//     die("Connection failed: " . mysqli_connect_error());
-//   }
-//   try {
-//     $user = "root";
-//     $pass = "root";
-//     $dbh = new PDO('mysql:host=localhost;dbname=FirstDB', $user, $pass);
-//     // echo "i am in db";
-//     foreach($dbh->query('SELECT * from CandidateDB') as $row) {
-//         print_r($row);
-//     }
-//     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//     $que="INSERT INTO CandidateDB (name, addr, email, mobno, high_qual) VALUES ('$name', '$addr', '$email', $mobno, '$high_qual')";
-//     // print_r($que);exit();
-//     $stmt=$dbh->prepare($que);
-//     $stmt->execute();
-//     echo"Registration Successful";
-//     } 
-//   catch (PDOException $e) {
-//     print "Error!: " . $e->getMessage() . "<br/>";
-//     die();
-//     }
-//     $dbh = null; 
-?> -->
+<!DOCTYPE html>
+<html>
+<head>   
+    <title>Application</title>
+</head> 
+	<body>
+    <div class="maindiv">
+		<form action="Register.php" method="POST">
+      <h3>Register Form</h3>
+      Name:<br><input type="text" name="name"><br>
+      Address:<br><input type="text" name="addr"><br>
+      E-mail id:<br><input type="text" name="email"><br>
+      Mob. no:<br><input type="text" name="mobno"><br>
+      Highest Qualification:<br><input type="text" name="high_qual"><br>
+      <br><input type="submit"> 
+      <p class="change_link">    
+        Already a member ?  
+      <a href="login.php" class="to_register"> Go and log in </a>  
+      </p> 
+      </form>
+    </div>
+	</body>
+</html>
