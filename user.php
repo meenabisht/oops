@@ -23,7 +23,7 @@ class user{
       return FALSE;
     }
   }
-
+  
   public function userregister($name,$addr,$email,$password,$mobno,$high_qual){
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
