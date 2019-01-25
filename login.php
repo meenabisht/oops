@@ -14,8 +14,8 @@ include("user.php");
       <h3>Login Form</h3>
       <label>Name or Email:</label>
       <input type="text" name="emailusername" value="<?php echo isset($_COOKIE['emailusername']) ? $_COOKIE['emailusername'] : ''; ?>"><br>
-      <label>Mob. no:</label>
-      <input type="text" name="mobno" value="<?php isset($_COOKIE['mobno']) ? $_COOKIE['mobno'] : ''; ?>"><br>
+      <label>Password:</label>
+      <input type="password" name="password" value="<?php isset($_COOKIE['password']) ? $_COOKIE['password'] : ''; ?>"><br>
       <input type="checkbox" name="rememberme" value="checked"> Remember Me<br><br>
       <input type="submit" value="Submit"/><br />
     </form>
@@ -25,12 +25,12 @@ include("user.php");
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
   $user_obj=new user();
-  $result = $user_obj->userlogin($_POST['emailusername'],$_POST['mobno']);
+  $result = $user_obj->userlogin($_POST['emailusername'],$_POST['password']);
   if($result) {
     $_SESSION["login_user"]= $_POST["emailusername"];
     if (isset($_POST['rememberme'])) {
       setcookie('emailusername',$_POST['emailusername']);
-      setcookie('mobno',$_POST['mobno']);
+      setcookie('password',$_POST['password']);
     }
   }
   else
