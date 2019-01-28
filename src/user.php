@@ -1,15 +1,16 @@
 <?php  
+namespace Meena\loginform;
 
+use Meena\loginform\DbConnect;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 session_start();
-spl_autoload_register(function ($class_name){    
-  include_once($class_name.".php"); 
-});
+
 class user{
 
   public function userlogin($emailusername, $pass) {
+    require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();
     if(!empty($_POST)) {
@@ -26,6 +27,7 @@ class user{
   }
 
   public function userregister($name,$addr,$email,$pass,$mobno,$high_qual){
+    require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
     $sql="SELECT * from CandidateDB WHERE cname = '$name' or email = '$email' AND pass = '$pass';";
@@ -40,12 +42,12 @@ class user{
       // var_dump($result1);//WE ARE GETTING FLASE VALUE HERE
       $msg = 2;
       $this->verify($name, $pass, $email, $hash);
-      header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
+      header("Location:http://localhost:8888/loginform/form/register.php?msg=$msg");
       // return FALSE;
     } else {  
       // return TRUE;
       $msg = 1;
-      header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
+      header("Location:http://localhost:8888/loginform/form/register.php?msg=$msg");
     }
   }
 
@@ -80,7 +82,7 @@ class user{
        ------------------------
    
        Please click this link to activate your account:
-       http://localhost:8888/loginform/verify.php?email='.$email.'&hash='.$hash.'
+       http://localhost:8888/loginform/form/verify.php?email='.$email.'&hash='.$hash.'
    
        '; // Our message above including the link';
       //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -103,7 +105,7 @@ class user{
       }
       else{
         $msg="Unverified";
-        header("Location:http://localhost:8888/loginform/login.php?msg=$msg");
+        header("Location:http://localhost:8888/loginform/form/login.php?msg=$msg");
       }
    
     }

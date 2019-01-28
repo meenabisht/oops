@@ -1,8 +1,11 @@
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', '1'); 
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1'); 
 
-include("user.php");
+namespace Meena\loginform\form;
+use Meena\form\user;
+use Meena\form\DbConnect;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +33,7 @@ include("user.php");
 <?php
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
+  require 'vendor/autoload.php';
   $user_obj=new user();
   $msg = $user_obj->userlogin($_POST['emailusername'],$_POST['pass']);
   
@@ -49,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
   }
   else{  
     $msg="invalid";
-    header("Location:http://localhost:8888/loginform/login.php?msg=$msg");     
+    header("Location:http://localhost:8888/loginform/form/login.php?msg=$msg");     
   }
 }
 ?>
