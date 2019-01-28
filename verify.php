@@ -1,11 +1,9 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', '1');
 
-spl_autoload_register(function ($class_name){    
-include($class_name.".php");
-});
+use Meena\loginform\user;
+use Meena\loginform\DbConnect;
 
+require 'vendor/autoload.php';
 $conn_obj = new DbConnect();
 $connection = $conn_obj->getConnection();
 //var_dump($connection);

@@ -1,12 +1,10 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-// if($_SESSION['login_user'])
-// {
-//   echo"You are logged in".'<a  href="welcome.php"> Please visit your site</a>'. $_SESSION['login_user'] ;
-//   exit();
-// }
+namespace Meena\loginform;
+
+use Meena\loginform\user;
+use Meena\loginform\DbConnect;
+
 ?>
 
 
@@ -27,7 +25,8 @@ ini_set('display_errors', '1');
       Highest Qualification:<br><input type="text" name="high_qual"><br>
       <br><input type="submit"> 
       <?php
-        include("user.php"); 
+        // include("user.php"); 
+        require 'vendor/autoload.php';
         if($_GET['msg'] == 1)
         echo '<div class="alert alert-success">Registered Successfully!! Please verify your email</div>';
         else if($_GET['msg'] == 2)
@@ -44,14 +43,9 @@ ini_set('display_errors', '1');
 
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-spl_autoload_register(function ($class_name){    
-include($class_name.".php");
-});
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
+  require 'vendor/autoload.php';
   $reg_obj = new user();
   // var_dump($reg_obj);
   $result1 = $reg_obj->userregister($_POST['cname'],$_POST['addr'],$_POST['email'],$_POST['pass'],$_POST['mobno'],$_POST['high_qual']);

@@ -1,8 +1,11 @@
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', '1'); 
 
-include("user.php");
+namespace Meena\loginform;
+
+use Meena\loginform\user;
+
+require 'vendor/autoload.php';
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -15,9 +15,9 @@ class ComposerStaticInit7324ac981a3f97cab1ee4d38caa62cd1
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'A' => 
+        'M' => 
         array (
-            'Acme\\' => 5,
+            'Meena\\loginform\\' => 16,
         ),
     );
 
@@ -30,7 +30,7 @@ class ComposerStaticInit7324ac981a3f97cab1ee4d38caa62cd1
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Acme\\' => 
+        'Meena\\loginform\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
