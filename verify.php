@@ -1,18 +1,16 @@
 <?php
-
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 use Meena\loginform\user;
 use Meena\loginform\DbConnect;
 
 require 'vendor/autoload.php';
 $conn_obj = new DbConnect();
 $connection = $conn_obj->getConnection();
-//var_dump($connection);
-$reg_obj = new user();
-echo "hello ".$_GET['email']."and hash= ".$_GET['hash'];
-if(isset($_GET['email']) && !empty($_GET['email'])AND isset($_GET['hash']) && !empty($_GET['hashh'])){
-  $result1 = $reg_obj->userregister($GET['email'],$_GET['hashh']);
-  $email = mysqli_escape_string($_GET['email']); 
-  $hash = mysqli_escape_string($_GET['hashh']); 
+  
+if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){  
+  $email = mysqli_escape_string($connection,$_GET['email']); 
+  $hash = mysqli_escape_string($connection,$_GET['hash']); 
   $sql="SELECT email,hashh,active FROM CandidateDB WHERE email = '$email' and hashh='$hash' and active='0'";
   $result=mysqli_query($connection,$sql);
   $row=mysqli_fetch_array($result,MYSQLI_ASSOC);

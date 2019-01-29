@@ -41,9 +41,9 @@ class user{
       $msg = 2;
       $this->verify($name, $pass, $email, $hash);
       header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
-      // return FALSE;
+       return FALSE;
     } else {  
-      // return TRUE;
+       return TRUE;
       $msg = 1;
       header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
     }
@@ -96,6 +96,7 @@ class user{
       $connection = $conn_obj->getConnection();
       $email = mysqli_real_escape_string($connection,$email);
       $sql="SELECT * FROM CandidateDB WHERE email = '$email' and active='0'";
+      // print_r(mysql_fetch_assoc($sql));
       $register_user = mysqli_query($connection,$sql) or die(mysqli_error($sql));
       $no_rows = mysqli_num_rows($register_user);
       if($no_rows == 0){
@@ -107,6 +108,10 @@ class user{
       }
    
     }
+
+    // public function emailverify($email,$hash){
+
+    // }
 }
 
 
