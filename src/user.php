@@ -34,6 +34,7 @@ class user implements loginregistration{
     require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
+    
     $sql="SELECT * from CandidateDB WHERE cname = '$name' or email = '$email' AND pass = '$pass';";
     $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);

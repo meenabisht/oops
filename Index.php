@@ -24,14 +24,14 @@ use Meena\loginform\DbConnect;
       Mob. no:<br><input type="number" name="mobno"><br>
       Highest Qualification:<br><input type="text" name="high_qual"><br>
       <br><input type="submit"> 
-      <!-- <?php
+      <?php
         // include("user.php"); 
         require 'vendor/autoload.php';
         if($_GET['msg'] == 1)
         echo '<div class="alert alert-success">Registered Successfully!! Please verify your email</div>';
         else if($_GET['msg'] == 2)
         echo '<div class="alert alert-danger">Registered Unsuccessfully!!</div>';
-      ?> -->
+      ?>
       <p class="change_link">    
         Already a member ?  
       <button><a href="login.php" class="to_register"> Go and log in </a></button>
