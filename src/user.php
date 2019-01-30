@@ -46,12 +46,12 @@ class user implements loginregistration{
       // var_dump($result1);//WE ARE GETTING FLASE VALUE HERE
       $msg = 2;
       $this->verify($name, $pass, $email, $hash);
-      header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
+      header("Location:http://localhost:8888/loginform/Index.php?msg=$msg");
       // return FALSE;
     } else {  
       // return TRUE;
       $msg = 1;
-      header("Location:http://localhost:8888/loginform/Register.php?msg=$msg");
+      header("Location:http://localhost:8888/loginform/Index.php?msg=$msg");
     }
   }
 
