@@ -1,8 +1,8 @@
 <?php 
-
 namespace Meena\loginform;
 
 use Meena\loginform\user;
+use Meena\loginform\DbConnect;
 
 require 'vendor/autoload.php';
 

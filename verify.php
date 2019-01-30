@@ -1,6 +1,4 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 use Meena\loginform\user;
 use Meena\loginform\DbConnect;
 
@@ -23,5 +21,4 @@ if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !
     echo '<div class="alert alert-danger">Please Check</div>';
   }
 }
-
 ?>
