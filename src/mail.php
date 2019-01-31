@@ -24,7 +24,7 @@ try {
   $mail->Port = 587;                                    // TCP port to connect to
   //Recipients
   $mail->setFrom('meena.bisht@qed42.com', 'Mailer');
-  $mail->addAddress('meena.bisht@qed42.com', ' ');     // Add a recipient
+  $mail->addAddress($email, ' ');     // Add a recipient
   
   
   //Content

@@ -30,18 +30,19 @@ class user implements loginregistration{
     }
   }
 
-  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual){
+  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual,$role){
     require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
-    
+
     $sql="SELECT * from CandidateDB WHERE cname = '$name' or email = '$email' AND pass = '$pass';";
     $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);
 
+
     if($no_rows == 0) {
       $hash = md5( rand(0,1000) );
-      $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual')";
+      $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual,role) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual','$role')";
       // var_dump($sql2);
       $result1 = mysqli_query($connection, $sql2);
       // var_dump($result1);//WE ARE GETTING FLASE VALUE HERE
