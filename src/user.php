@@ -12,12 +12,6 @@ use PHPMailer\PHPMailer\Exception;
 session_start();
 
 class user implements loginregistration{
-  
-  // public $data;
-  // public function __construct(DbConnect $conn_obj){
-  //   $this->data = $conn_obj;
-  // }
-
   public function userlogin($emailusername, $pass) {
     require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
@@ -42,7 +36,8 @@ class user implements loginregistration{
     }
   }
 
-  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual,$role){
+  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual,$roles){
+    echo "hello"."<br>";
     require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
@@ -50,26 +45,29 @@ class user implements loginregistration{
     $sql="SELECT * from CandidateDB WHERE cname = '$name' or email = '$email' AND pass = '$pass';";
     $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);
-
-
+    // echo $no_rows."<br>";
     if($no_rows == 0) {
+      echo "hello";
       $hash = md5( rand(0,1000) );
-      $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual,role) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual','$role')";
-      // var_dump($sql2);
+
+      // if($no_rows == 0){
+      $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual,roles) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual','$roles')";
+      // }
+
+      print_r($sql2);
       $result1 = mysqli_query($connection, $sql2);
-      // var_dump($result1);//WE ARE GETTING False VALUE HERE
-      // $msg = 2;
+       var_dump($result1);
+       if($result1)
+       {
+        echo "registered";
+        return true;
+       }
+       else{
+         echo "not registered";
+       }
       $this->verify($name, $pass, $email, $hash);
-      // header("Location:Index.php?msg=$msg");
-      echo"U R Registered";
-      // return FALSE;
-    } else {  
-      // return TRUE;
-      // $msg = 1;
-      echo"please register";
-      // header("Location:Index.php?msg=$msg");
     }
-  }
+}
 
   public function verify($name,$pass,$email, $hash){
     $mail_obj = new mail();
@@ -100,11 +98,7 @@ class user implements loginregistration{
     $connection = $conn_obj->getConnection();
      $stmt= "SELECT * FROM CandidateDB where (cname = '$emailusername' or email = '$emailusername') and roles='admin'";
      $register_user = mysqli_query($connection,$stmt) or die(mysqli_error($stmt));
-    //  getting false value
-    //  var_dump($register_user);
      $rows = mysqli_fetch_array($register_user);
-    //  var_dump($rows);
-    //echo $rows['roles'];
      if($rows['roles']=='admin'){
        return TRUE;
      }

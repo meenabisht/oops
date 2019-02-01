@@ -10,25 +10,25 @@ if( isset($_SESSION['login_user']))
   echo"<br>";
 }
 
-$conn_obj = new DbConnect();
-$connection = $conn_obj->getConnection();
-$stmt = "SELECT * FROM CandidateDB";
-$query = mysqli_query($connection,$stmt);
+// $conn_obj = new DbConnect();
+// $connection = $conn_obj->getConnection();
+// $stmt = "SELECT * FROM CandidateDB";
+// $query = mysqli_query($connection,$stmt);
 
-// fetch the result / convert result in to array 
+// // fetch the result / convert result in to array 
 
-while ($rows = mysqli_fetch_array($query)):
+// while ($rows = mysqli_fetch_array($query)):
 
-  $id = $rows['user_id'];
-  $name = $rows['cname'];
-  $addr = $rows['addr'];
-  $email = $rows['email'];
-  $pass = $rows['pass'];
+//   $id = $rows['user_id'];
+//   $name = $rows['cname'];
+//   $addr = $rows['addr'];
+//   $email = $rows['email'];
+//   $pass = $rows['pass'];
 
 
-echo "$id<br>$name<br>$addr<br>$email<br>$pass<br><br>";
+// echo "$id<br>$name<br>$addr<br>$email<br>$pass<br><br>";
 
-endwhile;
+// endwhile;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
   $del_obj=new Delete();
@@ -49,6 +49,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   <body>
       <form action="" method="POST">
      <button type="submit"><a href="logout.php">Logout</a></button><br>
+     <a href="ShowUser.php">Show User</a><br>
      <a href="UserAdd.php">Add User</a><br>
      enter id for delete user<br>
      id:<input type="text" name="user_id"><br>   
