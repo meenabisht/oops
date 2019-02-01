@@ -12,6 +12,11 @@ use PHPMailer\PHPMailer\Exception;
 session_start();
 
 class user implements loginregistration{
+  
+  // public $data;
+  // public function __construct(DbConnect $conn_obj){
+  //   $this->data = $conn_obj;
+  // }
 
   public function userlogin($emailusername, $pass) {
     require 'vendor/autoload.php';
@@ -23,8 +28,15 @@ class user implements loginregistration{
       if(mysqli_num_rows($result) > 0) {
         $_SESSION['login_user'] = $emailusername;
         $_SESSION["pass"]= $_POST['pass'];
-        header("location: welcome.php");
-        return TRUE;
+        if($this->checkadmin($emailusername,$pass)){
+          //echo"here";
+          header("location: WelcomeAdmin.php");
+        }
+        else{
+          echo"here@";
+          header("location: welcome.php?email=".$_POST['emailusername']."&pass=".$_POST['pass']);
+        }
+        //return TRUE;
       }
       return FALSE;
     }
@@ -45,15 +57,17 @@ class user implements loginregistration{
       $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual,role) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual','$role')";
       // var_dump($sql2);
       $result1 = mysqli_query($connection, $sql2);
-      // var_dump($result1);//WE ARE GETTING FLASE VALUE HERE
-      $msg = 2;
+      // var_dump($result1);//WE ARE GETTING False VALUE HERE
+      // $msg = 2;
       $this->verify($name, $pass, $email, $hash);
-      header("Location:http://localhost:8888/loginform/Index.php?msg=$msg");
+      // header("Location:Index.php?msg=$msg");
+      echo"U R Registered";
       // return FALSE;
     } else {  
       // return TRUE;
-      $msg = 1;
-      header("Location:http://localhost:8888/loginform/Index.php?msg=$msg");
+      // $msg = 1;
+      echo"please register";
+      // header("Location:Index.php?msg=$msg");
     }
   }
 
@@ -76,11 +90,24 @@ class user implements loginregistration{
       }
     else{
       $msg="Unverified";
-      header("Location:http://localhost:8888/loginform/login.php?msg=$msg");
+      header("Location:login.php?msg=$msg");
     }
   
   }
+
+  public function checkadmin($emailusername,$pass){
+    $conn_obj = new DbConnect();
+    $connection = $conn_obj->getConnection();
+     $stmt= "SELECT * FROM CandidateDB where (cname = '$emailusername' or email = '$emailusername') and roles='admin'";
+     $register_user = mysqli_query($connection,$stmt) or die(mysqli_error($stmt));
+    //  getting false value
+    //  var_dump($register_user);
+     $rows = mysqli_fetch_array($register_user);
+    //  var_dump($rows);
+    //echo $rows['roles'];
+     if($rows['roles']=='admin'){
+       return TRUE;
+     }
+    }  
 }
-
-
 ?> 

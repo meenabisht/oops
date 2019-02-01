@@ -1,11 +1,14 @@
 <?php
 
-//  error_reporting(E_ALL);
-//  ini_set('display_errors', '1');
+ error_reporting(E_ALL);
+ ini_set('display_errors', '1');
 use Meena\loginform\user;
 use Meena\loginform\DbConnect;
 
-?>
+// if(isset($_SESSION['login_user'])){
+//   echo "You are already logged in ...";
+//   }else{
+// ?>
 
 
 <!DOCTYPE html>
@@ -30,13 +33,9 @@ use Meena\loginform\DbConnect;
       </select><br>
       <br><input type="submit"> 
      
-      <?php
-      require 'vendor/autoload.php';
-      if($_GET['msg'] == 1)
-      echo '<div class="alert alert-success">Registered Successfully!! Please verify your email</div>';
-      else if($_GET['msg'] == 2)
-      echo '<div class="alert alert-danger">Registered Unsuccessfully!!</div>';      
-      ?>
+      
+            
+      
       <p class="change_link">    
         Already a member ?  
       <button><a href="login.php" class="to_register"> Go and log in </a></button>
@@ -47,21 +46,21 @@ use Meena\loginform\DbConnect;
 </html>
 
 <?php
-
+  
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
   require 'vendor/autoload.php';
   $reg_obj = new user();
   // var_dump($reg_obj);
   $result1 = $reg_obj->userregister($_POST['cname'],$_POST['addr'],$_POST['email'],$_POST['pass'],$_POST['mobno'],$_POST['high_qual'],$_POST['role']);
-  // var_dump($result1);//return boolean false  
-  if(!$result1)
+  var_dump($result1);//return boolean false  
+  if($result1==1)
   {
-    echo"not Inserted"; 
+    echo"Inserted"; 
   }
   else
   {
-    echo"Inserted";
+    echo"not Inserted";
     // header("location: welcome.php");
   }
 }

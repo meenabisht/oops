@@ -4,6 +4,16 @@ use Meena\loginform\DbConnect;
 
 require 'vendor/autoload.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// if(isset($_SESSION['login_user']))
+// {
+// echo "You are already logged in ...";
+// }else{
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,16 +39,13 @@ require 'vendor/autoload.php';
 </html>
 
 <?php
+echo"meena";
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
   $user_obj=new user();
   $msg = $user_obj->userlogin($_POST['emailusername'],$_POST['pass']);
-
-  if($msg==1){
-    $_SESSION['loggedin'] = true;
-    $_SESSION['login_user'] = $_POST["emailusername"];
-}
-  
+  // print_r($msg);
+  exit();
   if($msg) {
     $_SESSION["login_user"]= $_POST["emailusername"];
 
@@ -48,15 +55,29 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     }
 
     $msg=$check_obj->checkactive($emailusername);
+    print_r($msg);
+    exit();
     if($msg){
       $_SESSION['login_user'] = $msg;
-      header("location: welcome.php");
+      header("location: welcome.php?email=".$_POST['emailusername']."&pass=".$_POST['pass']);
     }
   }
   else{  
     $msg="invalid";
-    header("Location:http://localhost:8888/loginform/login.php?msg=$msg");     
+    header("Location:login.php?msg=$msg");     
   }
+
+
+  // $usob = $user_obj->checkadmin($_POST['emailusername'],$_POST['pass'],$_POST(['role']));
+  // print_r($usob);
+  // if($usob == 1){
+  //   header("location: WelcomeAdmin.php");
+  //   exit();
+  //   return TRUE;
+  // }else{
+  //   header("location: Welcome.php");
+  //   return FALSE;
+  // }
 }
 ?>
 
