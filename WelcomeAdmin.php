@@ -9,27 +9,6 @@ if( isset($_SESSION['login_user']))
   echo "welcome".$_SESSION['login_user']."!";
   echo"<br>";
 }
-
-// $conn_obj = new DbConnect();
-// $connection = $conn_obj->getConnection();
-// $stmt = "SELECT * FROM CandidateDB";
-// $query = mysqli_query($connection,$stmt);
-
-// // fetch the result / convert result in to array 
-
-// while ($rows = mysqli_fetch_array($query)):
-
-//   $id = $rows['user_id'];
-//   $name = $rows['cname'];
-//   $addr = $rows['addr'];
-//   $email = $rows['email'];
-//   $pass = $rows['pass'];
-
-
-// echo "$id<br>$name<br>$addr<br>$email<br>$pass<br><br>";
-
-// endwhile;
-
 if($_SERVER["REQUEST_METHOD"]=="POST"){
   $del_obj=new Delete();
   // echo "id=".$_POST['id']."<br>";

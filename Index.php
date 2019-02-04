@@ -3,9 +3,9 @@
 use Meena\loginform\user;
 use Meena\loginform\DbConnect;
 
-// if(isset($_SESSION['login_user'])){
-//   echo "You are already logged in ...";
-//   }
+if(isset($_SESSION['login_user'])){
+  echo "You are already logged in ...";
+}
 ?>
 
 
@@ -47,11 +47,11 @@ use Meena\loginform\DbConnect;
   $result1 = $reg_obj->userregister($_POST['cname'],$_POST['addr'],$_POST['email'],$_POST['pass'],$_POST['mobno'],$_POST['high_qual'],$_POST['roles']);
   if($result1)
   {
-    echo"not Inserted"; 
+    echo"Inserted"; 
   }
   else
   {
-    echo"Inserted";
+    echo"not Inserted";
   }
 }
   

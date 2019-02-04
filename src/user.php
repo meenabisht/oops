@@ -1,6 +1,7 @@
 <?php  
 namespace Meena\loginform;
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require 'vendor/autoload.php';
 
 use Meena\loginform\DbConnect;
@@ -30,41 +31,35 @@ class user implements loginregistration{
           echo"here@";
           header("location: welcome.php?email=".$_POST['emailusername']."&pass=".$_POST['pass']);
         }
-        //return TRUE;
+        return TRUE;
       }
       return FALSE;
     }
   }
 
-  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual,$roles){
-    echo "hello"."<br>";
+  public function userregister($name,$addr,$email,$pass,$mobno,$high_qual,$roles){    
     require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();  
-
     $sql="SELECT * from CandidateDB WHERE cname = '$name' or email = '$email' AND pass = '$pass';";
+    var_dump($sql);
     $register_user = mysqli_query($connection,$sql);
     $no_rows = mysqli_num_rows($register_user);
     // echo $no_rows."<br>";
-    if($no_rows == 0) {
-      echo "hello";
+    if($no_rows == 0) {      
       $hash = md5( rand(0,1000) );
-
-      // if($no_rows == 0){
       $sql2 = "INSERT INTO CandidateDB (cname,addr,email,hashh,active,pass,mobno,high_qual,roles) VALUES ('$name','$addr','$email','$hash',0,'$pass','$mobno','$high_qual','$roles')";
-      // }
-
-      print_r($sql2);
-      $result1 = mysqli_query($connection, $sql2);
-       var_dump($result1);
-       if($result1)
-       {
-        echo "registered";
-        return true;
-       }
-       else{
-         echo "not registered";
-       }
+      print_r($sql2);  
+      $result1 = mysqli_query($connection, $sql2);      
+      var_dump($result1);
+      if($result1)
+      {
+      echo "registered";
+      return true;
+      }
+      else{
+        echo "not registered";
+      }
       $this->verify($name, $pass, $email, $hash);
     }
 }
@@ -76,7 +71,7 @@ class user implements loginregistration{
 
 
   public function checkactive($email){
-    // require 'vendor/autoload.php';
+    require 'vendor/autoload.php';
     $conn_obj = new DbConnect();
     $connection = $conn_obj->getConnection();
     $email = mysqli_real_escape_string($connection,$email);

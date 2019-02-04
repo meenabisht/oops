@@ -30,5 +30,21 @@ class Delete{
       echo"updated the user";
     } 
   }
+
+  //filter the database record
+  public function recordfilter($roles){
+    $conn_obj = new DbConnect();
+    $connection = $conn_obj->getConnection();
+    $rl = "SELECT roles FROM CandidateDB WHERE roles='$roles'";
+    print_r($rl);
+    echo"<br/>";
+    $result = mysqli_query($connection, $rl);
+    var_dump($result);
+    if($result->num_rows>0){
+    $row=$result->fetch_assoc();
+    return $row ;
+    }
+  }
 }
 ?>
+
